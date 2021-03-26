@@ -1,12 +1,13 @@
 import DataContext from "../contexts/DataContext";
 
 import { useState, useEffect } from "react";
+import { arMA } from "date-fns/locale";
 
 function ContextWrapper({ children }) {
   const [planets, setPlanets] = useState([]);
-  const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
+  const [filterList, setFilterList] = useState([]);
 
   const [column, setColumn] = useState();
   const [comparison, setComparison] = useState();
@@ -26,28 +27,9 @@ function ContextWrapper({ children }) {
     setPlanets(aux);
     // getMovies()
   };
-  //#region Get Movies Function
-  // const getMovies = (endpoint) => {
-  //   let moviesList = [];
-
-  //   const epa = endpoint.map(async (endp) => {
-  //     const response = await fetch(endp);
-  //     const data = await response.json();
-
-  //     console.log(`data`, data.title);
-
-  //     moviesList = [...moviesList, data.title];
-
-  //     console.log(`moviesList >>>>>>>>>>>>>>`, moviesList);
-  //     // setMovies(moviesList);
-  //     // return moviesList
-  //   });
-  // };
-  //#endregion
 
   //#region Search Functions
   const handleSearchChange = async (value) => {
-
     const filtered = planets.filter((planet) => {
       return planet.name
         .toLowerCase()
@@ -61,6 +43,40 @@ function ContextWrapper({ children }) {
   //#endregion
 
   //#region Filter Box Functions
+  const handleRemoveFilter = (value) => {
+    function aux(object, value) {
+      Object.keys(object).find((key) => key === value);
+    }
+
+    const res = filterList.filter((item) => {
+      if (item.column === "population") {
+        return item;
+      }
+
+      if (item.column === "orbital_period") {
+        return item;
+      }
+
+      if (item.column === "diameter") {
+        return item;
+      }
+
+      if (item.column === "rotation_period") {
+        return item;
+      }
+
+      if (item.column === "surface_water") {
+        return item;
+      }
+    });
+
+    const newFilterList = filterList.filter(function (e) {
+      return e.column !== res[0].column;
+    });
+
+    setFilterList(newFilterList);
+  };
+
   const handleSelectColumn = (selectedColumn) => {
     setColumn(selectedColumn.target.value);
   };
@@ -84,12 +100,37 @@ function ContextWrapper({ children }) {
         "Preencha as 3 lacunas para filtrar e certifique-se de comparar um valor maior que 0"
       );
     }
-    console.log(`column`, column);
-    console.log(`comparison`, comparison);
-    console.log(`value`, value);
-    // deve remover os valores (dropdown) selecionados da listagem
-    // deve renderizar em tela o filtro aplicado com possibilidade de exclusão
-    // deve fazer a filtragem na tabela de dados
+
+    function aux(object, value) {
+      Object.keys(object).find((key) => key === value);
+    }
+
+    const res = planets.filter((item) => {
+      if (
+        comparison === "equal" &&
+        item[column] === value &&
+        item[column] !== "unknown"
+      ) {
+        return item;
+      }
+      if (
+        comparison === "more_than" &&
+        item[column] > value &&
+        item[column] !== "unknown"
+      ) {
+        return item;
+      }
+      if (
+        comparison === "less_than" &&
+        item[column] < value &&
+        item[column] !== "unknown"
+      ) {
+        return item;
+      }
+    });
+
+    setPlanets(res);
+    setFilterList(filterList.concat({ column, comparison, value }));
   };
   //#endregion
 
@@ -99,23 +140,25 @@ function ContextWrapper({ children }) {
   }, []);
 
   useEffect(() => {
-    console.log(`movies`, movies);
-  }, [movies]);
+    console.log(`filterList`, filterList);
+  }, [filterList]);
 
   return (
     <DataContext.Provider
       value={{
         planets,
         filtered,
+        filterList,
         search,
+        column,
+        comparison,
         value,
-        movies,
         handleSubmit,
         handleSearchChange,
         handleSelectColumn,
         handleSelectComparison,
         handleChangeValue,
-        // getMovies,
+        handleRemoveFilter,
       }}
     >
       {children}

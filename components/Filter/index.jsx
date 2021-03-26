@@ -15,6 +15,9 @@ export default function Filter() {
   return (
     <div>
       <select name="column" onChange={handleSelectColumn}>
+        <option value="" selected disabled hidden>
+          Selecione uma opção
+        </option>
         {columnsList.map((column) => (
           <option key={column.value} value={column.value}>
             {column.name}
@@ -23,6 +26,9 @@ export default function Filter() {
       </select>
 
       <select name="operator" onChange={handleSelectComparison}>
+        <option value="" selected disabled hidden>
+          Selecione uma opção
+        </option>
         {comparisonsList.map((comparison) => (
           <option key={comparison.value} value={comparison.value}>
             {comparison.name}
