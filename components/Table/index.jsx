@@ -7,7 +7,6 @@ import DataContext from "../../contexts/DataContext";
 
 export default function Table() {
   const { planets, search } = useContext(DataContext);
-  console.log("headerTableList :>> ", headerTableList);
   return (
     <div>
       <table>
@@ -16,19 +15,6 @@ export default function Table() {
             {headerTableList.map((title) => (
               <th key={title.name}>{title.name}</th>
             ))}
-            {/* <th>Nome</th>
-            <th>Tempo de Rotação</th>
-            <th>Tempo Orbital</th>
-            <th>Diâmetro</th>
-            <th>Clima</th>
-            <th>Gravidade</th>
-            <th>Terreno</th>
-            <th>Água da Superfície</th>
-            <th>População</th>
-            <th>Filmes</th>
-            <th>Criação</th>
-            <th>Edição</th>
-            <th>URL</th> */}
           </tr>
         </thead>
         <tbody>
