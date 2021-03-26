@@ -1,50 +1,36 @@
-import { useState } from "react";
+import { useContext } from "react";
 
-export default function Filter({ props }) {
-  const optionsList = [
-    { value: "population", name: "População" },
-    { value: "orbital_period", name: "Tempo Orbital" },
-    { value: "diameter", name: "Diâmetro" },
-    { value: "rotation_period", name: "Tempo de Rotação" },
-    { value: "surface_water", name: "Água da Superfície" },
-  ];
-  const operator = [
-    { value: "more_than", name: "maior que" },
-    { value: "less_than", name: "menor que" },
-    { value: "equal", name: "igual" },
-  ];
+import DataContext from "../../contexts/DataContext";
+import { columnsList, comparisonsList } from "../../constants";
 
-  const [option, setOption] = useState("");
-  const [op, setOp] = useState("");
-  const [param, setParam] = useState(0);
-
-  const handleChangeValue = (value) => {
-    setParam(value);
-  };
-
-  const handleSubmit = () => {
-    console.log("Deve aplicar os filtros");
-  };
-
-  console.log('props :>> ', props);
+export default function Filter() {
+  const {
+    handleSelectColumn,
+    handleSelectComparison,
+    value,
+    handleChangeValue,
+    handleSubmit,
+  } = useContext(DataContext);
 
   return (
-    <div className="filters">
-      <select name="param">
-        {optionsList.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.name}
+    <div>
+      <select name="column" onChange={handleSelectColumn}>
+        {columnsList.map((column) => (
+          <option key={column.value} value={column.value}>
+            {column.name}
           </option>
         ))}
       </select>
-      <select name="operator">
-        {operator.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.name}
+
+      <select name="operator" onChange={handleSelectComparison}>
+        {comparisonsList.map((comparison) => (
+          <option key={comparison.value} value={comparison.value}>
+            {comparison.name}
           </option>
         ))}
       </select>
-      <input type="number" value={param} onChange={handleChangeValue} />
+
+      <input type="number" value={value} onChange={handleChangeValue} />
       <button type="submit" onClick={handleSubmit}>
         Aplicar
       </button>

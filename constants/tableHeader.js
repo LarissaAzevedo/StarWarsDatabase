@@ -1,0 +1,15 @@
+export const headerTableList = [
+  { name: "Nome" },
+  { name: "Tempo de Rotação" },
+  { name: "Tempo Orbital" },
+  { name: "Diâmetro" },
+  { name: "Clima" },
+  { name: "Gravidade" },
+  { name: "Terreno" },
+  { name: "Água da Superfície" },
+  { name: "População" },
+  { name: "Filmes" },
+  { name: "Criação" },
+  { name: "Edição" },
+  { name: "URL" },
+];

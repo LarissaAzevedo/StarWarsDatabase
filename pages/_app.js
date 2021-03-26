@@ -1,11 +1,12 @@
 import "../styles/globals.css";
-import { DataProvider } from "../contexts/DataContext";
+
+import ContextWrapper from "../components/ContextWrapper";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <DataProvider>
-      <Component {...pageProps} />;
-    </DataProvider>
+    <ContextWrapper>
+      <Component {...pageProps} />
+    </ContextWrapper>
   );
 }
 

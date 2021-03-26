@@ -1,21 +1,18 @@
-import { useState } from "react";
+import { useContext } from "react";
+import DataContext from "../../contexts/DataContext";
 
-export default function Search({ handleSubmit }) {
-  const [search, setSearch] = useState("");
+export default function Search() {
+  const { search, handleSearchChange } = useContext(DataContext);
 
-  const handleSearchChange = (value) => {
-    setSearch(value.target.value);
-  };
-  // const handleSubmit = (e) => {
-  //   console.log("sei lá");
-  // };
   return (
-    <input
-      type="search"
-      placeholder="Busque por..."
-      value={search}
-      onChange={handleSearchChange}
-      onSubmit={handleSubmit}
-    />
+    <form className="search">
+      <input
+        name="query"
+        type="search"
+        placeholder="Busque por..."
+        value={search}
+        onChange={handleSearchChange}
+      />
+    </form>
   );
 }
