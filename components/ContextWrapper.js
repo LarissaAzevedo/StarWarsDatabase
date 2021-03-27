@@ -39,7 +39,6 @@ function ContextWrapper({ children }) {
     setSearch(value.target.value);
     setFiltered(filtered);
   };
-
   //#endregion
 
   //#region Filter Box Functions
