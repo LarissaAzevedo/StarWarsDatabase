@@ -1,3 +1,4 @@
+import styles from "../../styles/Table.module.scss";
 import { useContext } from "react";
 import { format } from "date-fns";
 
@@ -9,15 +10,15 @@ export default function Table() {
   const { planets, search } = useContext(DataContext);
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
+      <table className={styles.table}>
+        <thead className={styles.thead}>
+          <tr className={styles.tr}>
             {headerTableList.map((title) => (
-              <th key={title.name}>{title.name}</th>
+              <th className={styles.th} key={title.name}>{title.name}</th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tbody}>
           {planets
             .filter((val) => {
               if (search == "") {

@@ -1,3 +1,5 @@
+import styles from "../../styles/Filter.module.scss";
+
 import { useContext } from "react";
 
 import DataContext from "../../contexts/DataContext";
@@ -13,8 +15,12 @@ export default function Filter() {
   } = useContext(DataContext);
 
   return (
-    <div>
-      <select name="column" onChange={handleSelectColumn}>
+    <div className={styles.content}>
+      <select
+        className={styles.select}
+        name="column"
+        onChange={handleSelectColumn}
+      >
         <option value="" selected disabled hidden>
           Selecione uma opção
         </option>
@@ -25,7 +31,11 @@ export default function Filter() {
         ))}
       </select>
 
-      <select name="operator" onChange={handleSelectComparison}>
+      <select
+        className={styles.select}
+        name="operator"
+        onChange={handleSelectComparison}
+      >
         <option value="" selected disabled hidden>
           Selecione uma opção
         </option>
@@ -36,8 +46,14 @@ export default function Filter() {
         ))}
       </select>
 
-      <input type="number" value={value} onChange={handleChangeValue} />
-      <button type="submit" onClick={handleSubmit}>
+      <input
+        className={styles.input}
+        type="number"
+        placeholder="Insira um valor numérico"
+        value={value}
+        onChange={handleChangeValue}
+      />
+      <button className={styles.button} type="submit" onClick={handleSubmit}>
         Aplicar
       </button>
     </div>

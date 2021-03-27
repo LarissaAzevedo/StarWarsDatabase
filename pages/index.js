@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 import Table from "../components/Table";
 import Search from "../components/Search";
 import Filter from "../components/Filter";

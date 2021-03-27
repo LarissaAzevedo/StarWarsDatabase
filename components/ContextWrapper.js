@@ -45,7 +45,7 @@ function ContextWrapper({ children }) {
   //#region Filter Box Functions
   const handleRemoveFilter = (value) => {
     function aux(object, value) {
-      Object.keys(object).find((key) => key === value);
+      Object.keys(object).find((key) => key === name);
     }
 
     const res = filterList.filter((item) => {
@@ -134,14 +134,10 @@ function ContextWrapper({ children }) {
   };
   //#endregion
 
-  // Att
+
   useEffect(() => {
     getData();
   }, []);
-
-  useEffect(() => {
-    console.log(`filterList`, filterList);
-  }, [filterList]);
 
   return (
     <DataContext.Provider

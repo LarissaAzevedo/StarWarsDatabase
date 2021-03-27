@@ -1,3 +1,5 @@
+import styles from "../../styles/Search.module.scss";
+
 import { useContext } from "react";
 import DataContext from "../../contexts/DataContext";
 
@@ -7,9 +9,10 @@ export default function Search() {
   return (
     <form className="search">
       <input
+        className={styles.input}
         name="query"
         type="search"
-        placeholder="Busque por..."
+        placeholder="Digite sua busca..."
         value={search}
         onChange={handleSearchChange}
       />
