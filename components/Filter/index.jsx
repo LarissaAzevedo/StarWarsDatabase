@@ -1,9 +1,9 @@
-import styles from "../../styles/Filter.module.scss";
-
 import { useContext } from "react";
 
 import DataContext from "../../contexts/DataContext";
 import { columnsList, comparisonsList } from "../../constants";
+
+import * as S from "./styles";
 
 export default function Filter() {
   const {
@@ -15,12 +15,8 @@ export default function Filter() {
   } = useContext(DataContext);
 
   return (
-    <div className={styles.content}>
-      <select
-        className={styles.select}
-        name="column"
-        onChange={handleSelectColumn}
-      >
+    <S.Content>
+      <S.StyledSelect name="column" onChange={handleSelectColumn}>
         <option value="" selected disabled hidden>
           Selecione uma opção
         </option>
@@ -29,13 +25,9 @@ export default function Filter() {
             {column.name}
           </option>
         ))}
-      </select>
+      </S.StyledSelect>
 
-      <select
-        className={styles.select}
-        name="operator"
-        onChange={handleSelectComparison}
-      >
+      <S.StyledSelect name="operator" onChange={handleSelectComparison}>
         <option value="" selected disabled hidden>
           Selecione uma opção
         </option>
@@ -44,18 +36,17 @@ export default function Filter() {
             {comparison.name}
           </option>
         ))}
-      </select>
+      </S.StyledSelect>
 
-      <input
-        className={styles.input}
+      <S.StyledInput
         type="number"
         placeholder="Insira um valor numérico"
         value={value}
         onChange={handleChangeValue}
       />
-      <button className={styles.button} type="submit" onClick={handleSubmit}>
+      <S.StyledButton type="submit" onClick={handleSubmit}>
         Aplicar
-      </button>
-    </div>
+      </S.StyledButton>
+    </S.Content>
   );
 }

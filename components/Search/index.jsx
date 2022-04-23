@@ -1,15 +1,14 @@
-import styles from "../../styles/Search.module.scss";
-
 import { useContext } from "react";
 import DataContext from "../../contexts/DataContext";
+
+import * as S from "./styles";
 
 export default function Search() {
   const { search, handleSearchChange } = useContext(DataContext);
 
   return (
     <form className="search">
-      <input
-        className={styles.input}
+      <S.StyledInput
         name="query"
         type="search"
         placeholder="Digite sua busca..."

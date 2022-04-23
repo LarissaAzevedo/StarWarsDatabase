@@ -1,16 +1,17 @@
-import styles from "../styles/Home.module.scss";
 import Table from "../components/Table";
 import Search from "../components/Search";
 import Filter from "../components/Filter";
 import FilterResume from "../components/FilterResume";
 
+import * as S from "./styles";
+
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <S.Container>
       <Search />
       <Filter />
       <FilterResume />
       <Table />
-    </div>
+    </S.Container>
   );
 }

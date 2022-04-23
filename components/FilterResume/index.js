@@ -1,7 +1,8 @@
-import styles from "../../styles/FilterResume.module.scss";
 
 import { useContext } from "react";
 import DataContext from "../../contexts/DataContext";
+
+import * as S from "./styles";
 
 export default function FilterResume() {
   const { filterList, handleRemoveFilter } = useContext(DataContext);
@@ -39,22 +40,20 @@ export default function FilterResume() {
     <div>
       {filterList &&
         filterList.map((filt) => (
-          <div
-            className={styles.filters_list}
+          <S.FilterList
             key={filt.column}
             id={filt.column}
           >
-            <span className={styles.filter_line}>
+            <S.FilterLine>
               {getColumnName(filt.column)} | {getComparison(filt.comparison)} |{" "}
               {filt.value}
-            </span>
-            <button
-              className={styles.button}
+            </S.FilterLine>
+            <S.StyledButton
               onClick={() => handleRemoveFilter(filt.column)}
             >
               X
-            </button>
-          </div>
+            </S.StyledButton>
+          </S.FilterList>
         ))}
     </div>
   );

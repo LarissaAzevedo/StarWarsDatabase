@@ -1,4 +1,3 @@
-import styles from "../../styles/Table.module.scss";
 import { useContext } from "react";
 import { format } from "date-fns";
 
@@ -6,19 +5,21 @@ import { headerTableList } from "../../constants";
 
 import DataContext from "../../contexts/DataContext";
 
+import * as S from "./styles";
+
 export default function Table() {
   const { planets, search } = useContext(DataContext);
   return (
     <div>
-      <table className={styles.table}>
-        <thead className={styles.thead}>
-          <tr className={styles.tr}>
+      <S.StyledTable>
+        <S.StyledThead>
+          <S.StyledTr>
             {headerTableList.map((title) => (
-              <th className={styles.th} key={title.name}>{title.name}</th>
+              <S.StyledTh key={title.name}>{title.name}</S.StyledTh>
             ))}
-          </tr>
-        </thead>
-        <tbody className={styles.tbody}>
+          </S.StyledTr>
+        </S.StyledThead>
+        <S.StyledTbody>
           {planets
             .filter((val) => {
               if (search == "") {
@@ -54,8 +55,8 @@ export default function Table() {
                 </td>
               </tr>
             ))}
-        </tbody>
-      </table>
+        </S.StyledTbody>
+      </S.StyledTable>
     </div>
   );
 }
